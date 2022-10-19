@@ -1,0 +1,43 @@
+{
+    "name": "evilkraft/datatables-builder",
+    "description": "Datatables Builder for Slim Framework",
+    "license": "MIT",
+    "type": "library",
+    "keywords": ["Slim Framework", "datatable", "datatables", "doctrine", "orm", "Slim4", "Slim 4"],
+    "authors": [
+        {
+            "name": "Konstantin Kaluzhnikov",
+            "email": "k.kaluzhnikov@gmail.com",
+            "homepage": "https://github.com/EvilKraft"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "slim/slim": "~4.1",
+        "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
+        "symfony/options-resolver": "^4.4|^5.0|^6.0",
+        "symfony/translation": "^4.4|^5.0|^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "twig/twig": "~1.24",
+        "doctrine/orm": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "EvilKraft\\DatatablesBuilder\\": "src/DatatablesBuilder"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@phpunit"
+        ],
+        "phpunit": "php vendor/bin/phpunit"
+    }
+}
