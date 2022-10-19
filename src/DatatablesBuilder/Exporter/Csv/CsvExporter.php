@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace EvilKraft\DataTablesBuilder\Exporter\Csv;
 
 use EvilKraft\DataTablesBuilder\Exporter\DataTableExporterInterface;
+use Iterator;
 use SplFileInfo;
 
 /**
@@ -16,7 +17,7 @@ class CsvExporter implements DataTableExporterInterface
     /**
      * {@inheritdoc}
      */
-    public function export(array $columnNames, \Iterator $data): SplFileInfo
+    public function export(array $columnNames, Iterator $data): SplFileInfo
     {
         $filePath = sys_get_temp_dir() . '/' . uniqid('dt') . '.csv';
 

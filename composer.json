@@ -17,12 +17,24 @@
         "slim/slim": "~4.1",
         "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
         "symfony/options-resolver": "^4.4|^5.0|^6.0",
-        "symfony/translation": "^4.4|^5.0|^6.0"
+        "symfony/translation": "^4.4|^5.0|^6.0",
+        "twig/twig": "~1.24"
     },
     "require-dev": {
+        "ext-mongodb": "*",
         "phpunit/phpunit": "^5.7",
-        "twig/twig": "~1.24",
-        "doctrine/orm": "^2.5"
+        "doctrine/orm": "^2.5",
+        "ruflin/elastica": "^6.0|^7.0",
+        "mongodb/mongodb": "^1.2",
+        "slim/http": "^1",
+        "phpoffice/phpspreadsheet": "^1.6",
+        "slim/php-view": "^3"
+    },
+    "suggest": {
+        "doctrine/orm": "For full automated integration with Doctrine entities",
+        "mongodb/mongodb": "For integration with MongoDB collections",
+        "ruflin/elastica": "For integration with Elasticsearch indexes",
+        "phpoffice/phpspreadsheet": "To export the data from DataTables to Excel"
     },
     "autoload": {
         "psr-4": {

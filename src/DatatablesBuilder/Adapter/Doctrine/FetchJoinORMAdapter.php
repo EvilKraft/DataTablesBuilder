@@ -7,7 +7,6 @@ use EvilKraft\DataTablesBuilder\Adapter\AdapterQuery;
 use EvilKraft\DataTablesBuilder\Adapter\Doctrine\Event\ORMAdapterQueryEvent;
 use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
 use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -52,9 +51,6 @@ class FetchJoinORMAdapter extends ORMAdapter
         $this->use_simple_total = $options['simple_total_query'];
     }
 
-    /**
-     * @throws MappingException
-     */
     protected function prepareQuery(AdapterQuery $query)
     {
         $state = $query->getState();

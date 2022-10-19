@@ -46,9 +46,6 @@ class MongoDBAdapter extends AbstractAdapter
         $this->filters = $options['filters'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareQuery(AdapterQuery $query)
     {
         foreach ($query->getState()->getColumns() as $column) {
@@ -57,7 +54,7 @@ class MongoDBAdapter extends AbstractAdapter
             }
         }
 
-        $query->setTotalRows($this->collection->count());
+        $query->setTotalRows($this->collection->countDocuments());
     }
 
     /**
@@ -68,9 +65,6 @@ class MongoDBAdapter extends AbstractAdapter
         return '[' . implode('][', explode('.', $column->getField())) . ']';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getResults(AdapterQuery $query): Traversable
     {
         $state = $query->getState();
@@ -78,7 +72,7 @@ class MongoDBAdapter extends AbstractAdapter
         $filter = $this->buildFilter($state);
         $options = $this->buildOptions($state);
 
-        $query->setFilteredRows($this->collection->count($filter));
+        $query->setFilteredRows($this->collection->countDocuments($filter));
         $cursor = $this->collection->find($filter, $options);
         $cursor->setTypeMap(['root' => 'array', 'document' => 'array']);
 

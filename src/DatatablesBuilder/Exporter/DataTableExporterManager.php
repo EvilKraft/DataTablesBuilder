@@ -8,7 +8,6 @@ use EvilKraft\DataTablesBuilder\Exporter\Event\DataTableExporterResponseEvent;
 use Iterator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Factory\AppFactory;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * DataTableExporterManager.

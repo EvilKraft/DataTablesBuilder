@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace EvilKraft\DataTablesBuilder\Adapter;
 
+use Iterator;
+
 interface ResultSetInterface
 {
     /**
@@ -18,5 +20,5 @@ interface ResultSetInterface
     /**
      * Returns the raw data in the result set.
      */
-    public function getData(): \Iterator;
+    public function getData(): Iterator;
 }

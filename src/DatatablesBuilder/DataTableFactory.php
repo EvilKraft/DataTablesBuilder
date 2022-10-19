@@ -16,7 +16,7 @@ class DataTableFactory
     /** @var array<string, DataTableTypeInterface> */
     protected array $resolvedTypes = [];
 
-    private array $config = [];
+    private array $config;
     private DataTableRendererInterface $renderer;
     private EventDispatcherInterface   $eventDispatcher;
     private DataTableExporterManager   $exporterManager;

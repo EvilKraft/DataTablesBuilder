@@ -5,6 +5,7 @@ namespace EvilKraft\DataTablesBuilder\Adapter;
 
 use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
 use EvilKraft\DataTablesBuilder\DataTableState;
+use Generator;
 use Throwable;
 use function mb_strtolower;
 use function usort;
@@ -20,7 +21,7 @@ class ArrayAdapter implements AdapterInterface
     /** @var array */
     private array $data = [];
 
-    private $identifier;
+    private string $identifier;
 
     /**
      * {@inheritdoc}
@@ -72,9 +73,12 @@ class ArrayAdapter implements AdapterInterface
     }
 
     /**
-     * @return \Generator
+     * @param DataTableState $state
+     * @param array $data
+     * @param array $map
+     * @return Generator
      */
-    protected function processData(DataTableState $state, array $data, array $map)
+    protected function processData(DataTableState $state, array $data, array $map): Generator
     {
         $transformer = $state->getTransformer();
         $search = $state->getGlobalSearch() ?: '';

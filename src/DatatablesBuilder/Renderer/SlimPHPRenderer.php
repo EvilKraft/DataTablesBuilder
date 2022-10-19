@@ -4,6 +4,7 @@ namespace EvilKraft\DataTablesBuilder\Renderer;
 
 use EvilKraft\DataTablesBuilder\DataTable;
 use Slim\Views\PhpRenderer;
+use Throwable;
 
 class SlimPHPRenderer implements DatatableRendererInterface
 {
@@ -15,10 +16,13 @@ class SlimPHPRenderer implements DatatableRendererInterface
         $this->renderer = $renderer;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function renderDataTable(DataTable $dataTable, string $template, array $parameters): string
     {
         $parameters['datatable'] = $dataTable;
 
-        return $this->renderer->render($template, $parameters);
+        return $this->renderer->fetch($template, $parameters);
     }
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM;
 
+use Doctrine\Persistence\Mapping\MappingException;
 use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
 use EvilKraft\DataTablesBuilder\DataTableState;
 use Doctrine\ORM\EntityManagerInterface;
@@ -59,6 +60,10 @@ class AutomaticQueryBuilder implements QueryBuilderProcessorInterface
         $this->setJoins($queryBuilder);
     }
 
+    /**
+     * @throws \ReflectionException
+     * @throws MappingException
+     */
     protected function processColumn(AbstractColumn $column)
     {
         $field = $column->getField();
@@ -72,6 +77,10 @@ class AutomaticQueryBuilder implements QueryBuilderProcessorInterface
         }
     }
 
+    /**
+     * @throws \ReflectionException
+     * @throws MappingException
+     */
     private function addSelectColumns(AbstractColumn $column, string $field)
     {
         $currentPart = $this->entityShortName;
@@ -122,6 +131,10 @@ class AutomaticQueryBuilder implements QueryBuilderProcessorInterface
         return array_shift($identifiers);
     }
 
+    /**
+     * @throws \ReflectionException
+     * @throws MappingException
+     */
     private function setIdentifierFromAssociation(string $association, string $key, ClassMetadata $metadata): ClassMetadata
     {
         $targetEntityClass = $metadata->getAssociationTargetClass($key);

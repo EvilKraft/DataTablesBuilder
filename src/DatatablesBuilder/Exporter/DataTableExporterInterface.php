@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace EvilKraft\DataTablesBuilder\Exporter;
 
+use Iterator;
+use SplFileInfo;
+
 /**
  * Defines a DataTable exporter.
  *
@@ -13,7 +16,7 @@ interface DataTableExporterInterface
     /**
      * Exports the data from the DataTable to a file.
      */
-    public function export(array $columnNames, \Iterator $data): \SplFileInfo;
+    public function export(array $columnNames, Iterator $data): SplFileInfo;
 
     /**
      * A unique name to identify the exporter.

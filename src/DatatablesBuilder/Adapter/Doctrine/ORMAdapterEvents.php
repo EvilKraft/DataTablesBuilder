@@ -5,8 +5,6 @@ namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine;
 
 /**
  * Available events.
- *
- * @author Maxime Pinot <contact@maximepinot.com>
  */
 final class ORMAdapterEvents
 {
@@ -16,7 +14,7 @@ final class ORMAdapterEvents
      *
      * It can be useful to configure the cache.
      *
-     * @Event("Omines\DataTablesBundle\Adapter\Doctrine\Event\ORMAdapterQueryEvent")
+     * @Event("EvilKraft\DataTablesBundle\Adapter\Doctrine\Event\ORMAdapterQueryEvent")
      */
-    const PRE_QUERY = 'omines_datatables.ormadapter.pre_query';
+    const PRE_QUERY = 'datatables.ormadapter.pre_query';
 }

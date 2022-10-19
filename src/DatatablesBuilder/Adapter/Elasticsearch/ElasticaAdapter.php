@@ -13,6 +13,7 @@ use Elastica\Query\MultiMatch;
 use Elastica\Search;
 use Exception;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Traversable;
 
 /**
  * ElasticaAdapter.
@@ -41,7 +42,7 @@ class ElasticaAdapter extends AbstractAdapter
     }
 
     /**
-     * {@inheritdoc}
+     * @throws Exception
      */
     protected function prepareQuery(AdapterQuery $query)
     {
@@ -65,10 +66,7 @@ class ElasticaAdapter extends AbstractAdapter
         return "[{$column->getField()}]";
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getResults(AdapterQuery $query): \Traversable
+    protected function getResults(AdapterQuery $query): Traversable
     {
         $state = $query->getState();
         $search = new Search($query->get('client'));
