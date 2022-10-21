@@ -1,7 +1,7 @@
 /**
  * Created by Kraft on 02.09.2016.
  */
-(function($) {
+export default function initSelectAllBtn() {
 	$.fn.dataTable.ext.buttons.select_all = {
 		page: 'all',
 
@@ -40,4 +40,4 @@
 		},
 
 	};
-}(jQuery));
+};

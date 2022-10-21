@@ -1,74 +1,76 @@
 /**
  * Created by Kraft on 31.10.2017.
  */
-(function($) {
-    let oldExportAction = function (self, e, dt, button, config) {
 
-        let _dtButtons  = $.fn.dataTable.ext.buttons;
-        let btnName     = '';
-        const classList = button[0].classList;
+function oldExportAction(self, e, dt, button, config) {
 
-        // Common option that will use the HTML5 or Flash export buttons
-        switch (true) {
-            case classList.contains('buttons-copy'):  btnName = _dtButtons.copy(dt, config);  break;
-            case classList.contains('buttons-csv'):   btnName = _dtButtons.csv(dt, config);   break;
-            case classList.contains('buttons-excel'): btnName = _dtButtons.excel(dt, config); break;
-            case classList.contains('buttons-pdf'):   btnName = _dtButtons.pdf(dt, config);   break;
-            case classList.contains('buttons-print'): btnName = 'print';                      break;
-            default: return;
-        }
+    let _dtButtons  = $.fn.dataTable.ext.buttons;
+    let btnName     = '';
+    const classList = button[0].classList;
 
-        _dtButtons[btnName].action.call(self, e, dt, button, config);
-    };
+    // Common option that will use the HTML5 or Flash export buttons
+    switch (true) {
+        case classList.contains('buttons-copy'):  btnName = _dtButtons.copy(dt, config);  break;
+        case classList.contains('buttons-csv'):   btnName = _dtButtons.csv(dt, config);   break;
+        case classList.contains('buttons-excel'): btnName = _dtButtons.excel(dt, config); break;
+        case classList.contains('buttons-pdf'):   btnName = _dtButtons.pdf(dt, config);   break;
+        case classList.contains('buttons-print'): btnName = 'print';                      break;
+        default: return;
+    }
 
-    let newExportAction = function (e, dt, button, config) {
-        let self = this;
-        let info = dt.page.info();
+    _dtButtons[btnName].action.call(self, e, dt, button, config);
+}
 
-        if(info.serverSide === false){
+function newExportAction(e, dt, button, config) {
+    let self = this;
+    let info = dt.page.info();
+
+    if(info.serverSide === false){
+        oldExportAction(self, e, dt, button, config);
+        return;
+    }
+
+    let oldStart = dt.settings()[0]._iDisplayStart;
+
+    dt.one('preXhr', function (e, s, data) {
+        // Just this once, load all data from the server...
+        data.start = 0;
+        data.length = 2147483647;
+
+        dt.one('preDraw', function (e, settings) {
+            // Call the original action function
             oldExportAction(self, e, dt, button, config);
-            return;
-        }
 
-        let oldStart = dt.settings()[0]._iDisplayStart;
-
-        dt.one('preXhr', function (e, s, data) {
-            // Just this once, load all data from the server...
-            data.start = 0;
-            data.length = 2147483647;
-
-            dt.one('preDraw', function (e, settings) {
-                // Call the original action function
-                oldExportAction(self, e, dt, button, config);
-
-                dt.one('preXhr', function (e, s, data) {
-                    // DataTables thinks the first item displayed is index 0, but we're not drawing that.
-                    // Set the property to what it was before exporting.
-                    settings._iDisplayStart = oldStart;
-                    data.start = oldStart;
-                });
-
-                // Reload the grid with the original page. Otherwise, API functions like table.cell(this) don't work properly.
-                setTimeout(dt.ajax.reload, 0);
-
-                // Prevent rendering of the full data to the DOM
-                return false;
+            dt.one('preXhr', function (e, s, data) {
+                // DataTables thinks the first item displayed is index 0, but we're not drawing that.
+                // Set the property to what it was before exporting.
+                settings._iDisplayStart = oldStart;
+                data.start = oldStart;
             });
+
+            // Reload the grid with the original page. Otherwise, API functions like table.cell(this) don't work properly.
+            setTimeout(dt.ajax.reload, 0);
+
+            // Prevent rendering of the full data to the DOM
+            return false;
         });
+    });
 
-        // Require the server with the new one-time export settings
-        dt.ajax.reload();
-    };
+    // Require the server with the new one-time export settings
+    dt.ajax.reload();
+}
 
-    let buttonCommon = {
-        action: newExportAction,
-        exportOptions: {
-            //columns: ':not(:last-child)'
-            //columns: ':not(.action_btns_container)'
-            //columns: [ 0, ':visible' ]
-            columns: [ 0, ':visible:not(.action_btns_container)' ]
-        }
-    };
+let exportButtonDefaults = {
+    action: newExportAction,
+    exportOptions: {
+        //columns: ':not(:last-child)'
+        //columns: ':not(.action_btns_container)'
+        //columns: [ 0, ':visible' ]
+        columns: [ 0, ':visible:not(.action_btns_container)' ]
+    }
+};
+
+export default function initExportCollection() {
 
     $.fn.dataTable.ext.buttons.excel2 = {
         text: 'Export to Excel 2',
@@ -145,23 +147,22 @@
         }
     };
 
-    jQuery.fn.dataTable.ext.buttons.export_collection = {
-
+    $.fn.dataTable.ext.buttons.export_collection = {
         extend: 'collection',
         text: '<i class="far fa-save" aria-hidden="true"></i>',
         titleAttr: function ( dt ) {
             return dt.i18n( 'buttons.Export', 'Export');
         },
         buttons: [
-            $.extend( true, {}, buttonCommon, {
+            $.extend( true, {}, exportButtonDefaults, {
                 extend: 'copy',
                 className: 'dtExport exportCopy',
             }),
-            $.extend( true, {}, buttonCommon, {
+            $.extend( true, {}, exportButtonDefaults, {
                 extend: 'csv',
                 className: 'dtExport exportCsv',
             }),
-            $.extend( true, {}, buttonCommon, {
+            $.extend( true, {}, exportButtonDefaults, {
                 extend: 'excel',
                 className: 'dtExport exportExcel',
             }),
@@ -169,16 +170,16 @@
                 extend: 'excel2',
                 className: 'dtExport exportExcel buttons-excel2',
             }),
-            $.extend( true, {}, buttonCommon, {
+            $.extend( true, {}, exportButtonDefaults, {
                 extend: 'pdf',
                 className: 'dtExport exportPdf',
             }),
-            $.extend( true, {}, buttonCommon, {
+            $.extend( true, {}, exportButtonDefaults, {
                 extend: 'print',
                 className: 'dtExport exportPrint',
             }),
         ],
     };
-}(jQuery));
+};
 
 

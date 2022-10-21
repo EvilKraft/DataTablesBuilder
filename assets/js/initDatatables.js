@@ -1,6 +1,14 @@
-
+import initActionBtns       from './dataTableActionBtns.js';
+import initColumnFilter     from './dataTableColumnFilter.js';
+import exportButtonDefaults from './dataTableExportCollection.js';
+import initSelectAllBtn     from './dataTableSelectAllBtn.js';
 
 (function($) {
+    initActionBtns();
+    initColumnFilter();
+    exportButtonDefaults();
+    initSelectAllBtn();
+
     /**
      * Initializes the datatable dynamically.
      */
@@ -13,7 +21,7 @@
 
         for (const column of config.options.columns){
             if(column.className === 'action_btns_container'){
-                column.render = dataTable.render.dataTableActionBtns();
+                column.render = $.fn.dataTable.render.dataTableActionBtns();
                 column.width  = '1%';
             }
         }
@@ -37,7 +45,6 @@
         dom: "<'row'<'col-sm-6 col-lg-3'B><'col-sm-6 col-lg-3'l><'col-sm-6 col-lg-4'fr><'col-sm-6 col-lg-2 text-right'b>>" +
             "<'row'<'col-sm-12't>>" +
             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-
 
 
         scrollY: true /*'64vh'*/,
@@ -106,52 +113,48 @@
 
     $.fn.dataTable.ext.errMode = 'throw';     //throw a Javascript error to the browser's console, rather than alerting it.
 
+}(jQuery));
 
+/**
+ * Gets the data table height based upon the browser page
+ * height and the data table vertical position.
+ *
+ * @return integer Data table height, in pixels.
+ */
+function jsGetDataTableHeightPx() {
+    let id = "tableData";
 
+    // set default return height
+    let retHeightPx = 350;
 
-
-
-    /**
-     * Gets the data table height based upon the browser page
-     * height and the data table vertical position.
-     *
-     * @return integer Data table height, in pixels.
-     */
-    function jsGetDataTableHeightPx() {
-        let id = "tableData";
-
-        // set default return height
-        let retHeightPx = 350;
-
-        // no nada if there is no dataTable (container) element
-        let dataTable = document.getElementById(id);
-        if(!dataTable) {
-            return retHeightPx;
-        }
-
-        //console.log($("#tableData").DataTable().page.len());
-
-        // do nada if we can't determine the browser height
-        const pageHeight = $(window).height();
-        if(pageHeight < 0) {
-            return retHeightPx;
-        }
-
-        // determine the data table height based upon the browser page height
-        let dataTableHeight = pageHeight - 320; //default height
-        let dataTablePos = $("#"+id).offset();
-        if(dataTablePos != null && dataTablePos.top > 0) {
-            // the data table height is the page height minus the top of the data table,
-            // minus space for any buttons at the bottom of the page
-            dataTableHeight = pageHeight - dataTablePos.top - 120;
-
-
-            // clip height to min. value
-            retHeightPx = Math.max(100, dataTableHeight);
-        }
-
-        //    retHeightPx = retHeightPx + 50;
-
+    // no nada if there is no dataTable (container) element
+    let dataTable = document.getElementById(id);
+    if(!dataTable) {
         return retHeightPx;
     }
-}(jQuery));
+
+    //console.log($("#tableData").DataTable().page.len());
+
+    // do nada if we can't determine the browser height
+    const pageHeight = $(window).height();
+    if(pageHeight < 0) {
+        return retHeightPx;
+    }
+
+    // determine the data table height based upon the browser page height
+    let dataTableHeight = pageHeight - 320; //default height
+    let dataTablePos = $("#"+id).offset();
+    if(dataTablePos != null && dataTablePos.top > 0) {
+        // the data table height is the page height minus the top of the data table,
+        // minus space for any buttons at the bottom of the page
+        dataTableHeight = pageHeight - dataTablePos.top - 120;
+
+
+        // clip height to min. value
+        retHeightPx = Math.max(100, dataTableHeight);
+    }
+
+    //    retHeightPx = retHeightPx + 50;
+
+    return retHeightPx;
+}

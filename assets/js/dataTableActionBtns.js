@@ -1,56 +1,22 @@
-(function(window, document, $, undefined) {
-    function dtRowDelete(event) {
-        event.preventDefault();
-        let btn = $(event.currentTarget);
-        btn.trigger("blur");
+function dtRowDelete(event) {
+    event.preventDefault();
+    let btn = $(event.currentTarget);
+    btn.trigger("blur");
 
-        let id  = btn.data('pkey');
-        let row = $('#row_'+id);
-        let api = $(event.delegateTarget).DataTable();
+    let id  = btn.data('pkey');
+    let row = $('#row_'+id);
+    let api = $(event.delegateTarget).DataTable();
 
-        if (confirm(api.i18n('buttons.rowDeleteConfirm', 'Are you sure you wont to delete this item?'))){
-            $.ajax({
-                url: window.location.href+'/'+id,
-                type: "DELETE",
-                dataType: "json",
-            }).done(function(data) {
-                if(data.status === 1){
-                    api.row(row).remove().draw();
-
-                    appendAlert('success', api.i18n('buttons.itemDeleted', 'Item deleted'));
-                }else{
-                    data.errors.forEach(function(error) {
-                        appendAlert('error', error.message);
-                    });
-                }
-            }).fail(function(jqXHR, textStatus) {
-                appendAlert('error', textStatus);
-            });
-        }
-    }
-
-    function dtRowsDelete(event, dt, node, conf) {
-        let rows = dt.rows('.selected');
-        let ids  = rows.nodes().to$().map(function() {return $(this).data('pkey');}).get();
-//      let ids  = rows.ids().toArray().map(function(value) { return value.replace(/row_(.+)/, "$1"); });
-
-        if(ids.length === 0){
-            return;
-        }
-
-        if(!confirm(dt.i18n('buttons.rowsDeleteConfirm', 'Are you sure you wont to delete selected items?'))){
-            return;
-        }
-
+    if (confirm(api.i18n('buttons.rowDeleteConfirm', 'Are you sure you wont to delete this item?'))){
         $.ajax({
-            url: window.location.href+"/"+ids.join(','),
+            url: window.location.href+'/'+id,
             type: "DELETE",
             dataType: "json",
         }).done(function(data) {
             if(data.status === 1){
-                rows.remove().draw();
+                api.row(row).remove().draw();
 
-                appendAlert('success', dt.i18n('buttons.itemsDeleted', 'Items deleted'));
+                appendAlert('success', api.i18n('buttons.itemDeleted', 'Item deleted'));
             }else{
                 data.errors.forEach(function(error) {
                     appendAlert('error', error.message);
@@ -60,32 +26,66 @@
             appendAlert('error', textStatus);
         });
     }
+}
 
-    function dtRowMove(event){
-        event.preventDefault();
-        let btn = $(event.currentTarget);
-        btn.trigger("blur");
+function dtRowsDelete(event, dt, node, conf) {
+    let rows = dt.rows('.selected');
+    let ids  = rows.nodes().to$().map(function() {return $(this).data('pkey');}).get();
+//      let ids  = rows.ids().toArray().map(function(value) { return value.replace(/row_(.+)/, "$1"); });
 
-        const id  = btn.data('pkey');
-
-        $.ajax({
-            url: window.location.href+'/'+id+'/move',
-            type: "PUT",
-            dataType: "json",
-            data: {direction: event.data.direction}
-        }).done(function(data) {
-            if(data.status === 1){
-                $(event.delegateTarget).DataTable().draw();
-            }else{
-                data.errors.forEach(function(error) {
-                    appendAlert('error', error.message);
-                });
-            }
-        }).fail(function(jqXHR, textStatus) {
-            appendAlert('error', textStatus);
-        });
+    if(ids.length === 0){
+        return;
     }
 
+    if(!confirm(dt.i18n('buttons.rowsDeleteConfirm', 'Are you sure you wont to delete selected items?'))){
+        return;
+    }
+
+    $.ajax({
+        url: window.location.href+"/"+ids.join(','),
+        type: "DELETE",
+        dataType: "json",
+    }).done(function(data) {
+        if(data.status === 1){
+            rows.remove().draw();
+
+            appendAlert('success', dt.i18n('buttons.itemsDeleted', 'Items deleted'));
+        }else{
+            data.errors.forEach(function(error) {
+                appendAlert('error', error.message);
+            });
+        }
+    }).fail(function(jqXHR, textStatus) {
+        appendAlert('error', textStatus);
+    });
+}
+
+function dtRowMove(event){
+    event.preventDefault();
+    let btn = $(event.currentTarget);
+    btn.trigger("blur");
+
+    const id  = btn.data('pkey');
+
+    $.ajax({
+        url: window.location.href+'/'+id+'/move',
+        type: "PUT",
+        dataType: "json",
+        data: {direction: event.data.direction}
+    }).done(function(data) {
+        if(data.status === 1){
+            $(event.delegateTarget).DataTable().draw();
+        }else{
+            data.errors.forEach(function(error) {
+                appendAlert('error', error.message);
+            });
+        }
+    }).fail(function(jqXHR, textStatus) {
+        appendAlert('error', textStatus);
+    });
+}
+
+export default function initActionBtns() {
     $.fn.dataTable.render.dataTableActionBtns = function (  ) {
         const className = "btn btn-link text-decoration-none";
 
@@ -186,7 +186,7 @@
         $(e.target).on('click', '.dtRowMoveUp', {direction: 'up'}, dtRowMove);
         $(e.target).on('click', '.dtRowMoveDn', {direction: 'dn'}, dtRowMove);
     });
-})(window, document, jQuery);
+};
 
 
 
