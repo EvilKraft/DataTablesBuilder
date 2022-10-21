@@ -2,7 +2,6 @@
     "name": "evilkraft/datatables-builder",
     "description": "Datatables Builder for Slim Framework",
     "license": "MIT",
-    "type": "library",
     "keywords": ["Slim Framework", "datatable", "datatables", "doctrine", "orm", "Slim4", "Slim 4"],
     "authors": [
         {
