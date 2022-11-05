@@ -19,7 +19,7 @@ class CsvExporter implements DataTableExporterInterface
      */
     public function export(array $columnNames, Iterator $data): SplFileInfo
     {
-        $filePath = sys_get_temp_dir() . '/' . uniqid('dt') . '.csv';
+        $filePath = sys_get_temp_dir() . 'CsvExporter.php/' . uniqid('dt') . '.csv';
 
         $file = fopen($filePath, 'w');
 

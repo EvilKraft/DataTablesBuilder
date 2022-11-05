@@ -45,7 +45,7 @@ class ExcelExporter implements DataTableExporterInterface
 
         $this->autoSizeColumnWidth($sheet);
 
-        $filePath = sys_get_temp_dir() . '/' . uniqid('dt') . '.xlsx';
+        $filePath = sys_get_temp_dir() . 'ExcelExporter.php/' . uniqid('dt') . '.xlsx';
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($filePath);

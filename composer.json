@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
-        "slim/slim": "~4.1",
+        "slim/slim": "^4",
         "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
         "symfony/options-resolver": "^4.4|^5.0|^6.0",
         "symfony/translation": "^4.4|^5.0|^6.0",
@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "EvilKraft\\DatatablesBuilder\\": "src/DatatablesBuilder"
+            "EvilKraft\\DatatablesBuilder\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "EvilKraft\\Tests\\DatatablesBuilder\\": "tests/"
         }
     },
     "scripts": {
