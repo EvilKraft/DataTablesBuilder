@@ -18,7 +18,8 @@
         "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
         "symfony/options-resolver": "^4.4|^5.0|^6.0",
         "symfony/translation": "^4.4|^5.0|^6.0",
-        "twig/twig": "^3"
+        "twig/twig": "^3",
+        "ext-intl": "*"
     },
     "require-dev": {
         "ext-mongodb": "*",
@@ -43,7 +44,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "EvilKraft\\Tests\\DatatablesBuilder\\": "tests/"
+            "EvilKraft\\DatatablesBuilder\\Tests\\": "tests/"
         }
     },
     "scripts": {

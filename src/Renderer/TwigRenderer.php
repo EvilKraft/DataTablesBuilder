@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace EvilKraft\DataTablesBuilder\Renderer;
+namespace EvilKraft\DatatablesBuilder\Renderer;
 
-use EvilKraft\DataTablesBuilder\DataTable;
+use EvilKraft\DatatablesBuilder\DataTable;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;

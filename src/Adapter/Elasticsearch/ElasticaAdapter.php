@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Elasticsearch;
+namespace EvilKraft\DatatablesBuilder\Adapter\Elasticsearch;
 
-use EvilKraft\DataTablesBuilder\Adapter\AbstractAdapter;
-use EvilKraft\DataTablesBuilder\Adapter\AdapterQuery;
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\Adapter\AbstractAdapter;
+use EvilKraft\DatatablesBuilder\Adapter\AdapterQuery;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use Elastica\Client;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;

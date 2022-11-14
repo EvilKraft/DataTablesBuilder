@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine\ORM;
 
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\QueryBuilder;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter;
+namespace EvilKraft\DatatablesBuilder\Exporter;
 
 use ArrayIterator;
 use InvalidArgumentException;

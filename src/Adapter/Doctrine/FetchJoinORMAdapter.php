@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine;
 
-use EvilKraft\DataTablesBuilder\Adapter\AdapterQuery;
-use EvilKraft\DataTablesBuilder\Adapter\Doctrine\Event\ORMAdapterQueryEvent;
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\Adapter\AdapterQuery;
+use EvilKraft\DatatablesBuilder\Adapter\Doctrine\Event\ORMAdapterQueryEvent;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;

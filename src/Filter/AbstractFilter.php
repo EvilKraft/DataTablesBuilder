@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Filter;
+namespace EvilKraft\DatatablesBuilder\Filter;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

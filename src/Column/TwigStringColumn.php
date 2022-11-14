@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Column;
+namespace EvilKraft\DatatablesBuilder\Column;
 
-use EvilKraft\DataTablesBuilder\Renderer\DatatableRendererInterface;
+use EvilKraft\DatatablesBuilder\Renderer\DatatableRendererInterface;
 use Exception;
 use Twig\Extension\StringLoaderExtension;
 

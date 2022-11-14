@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\MongoDB;
+namespace EvilKraft\DatatablesBuilder\Adapter\MongoDB;
 
-use EvilKraft\DataTablesBuilder\Adapter\AbstractAdapter;
-use EvilKraft\DataTablesBuilder\Adapter\AdapterQuery;
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\DataTable;
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\Adapter\AbstractAdapter;
+use EvilKraft\DatatablesBuilder\Adapter\AdapterQuery;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\DataTable;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use MongoDB\BSON\Regex;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Collection;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter;
+namespace EvilKraft\DatatablesBuilder\Adapter;
 
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\DataTableState;
 
 /**
  * AdapterQuery encapsulates a single request to an adapter, used by the AbstractAdapter base class. It is generically

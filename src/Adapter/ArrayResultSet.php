@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter;
+namespace EvilKraft\DatatablesBuilder\Adapter;
 
 use ArrayIterator;
 use Iterator;

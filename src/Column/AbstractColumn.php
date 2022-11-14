@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Column;
+namespace EvilKraft\DatatablesBuilder\Column;
 
-use EvilKraft\DataTablesBuilder\Filter\AbstractFilter;
+use EvilKraft\DatatablesBuilder\Filter\AbstractFilter;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractColumn

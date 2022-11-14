@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter\Event;
+namespace EvilKraft\DatatablesBuilder\Exporter\Event;
 
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Contracts\EventDispatcher\Event;

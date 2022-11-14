@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine\Event;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine\Event;
 
 use Doctrine\ORM\Query;
 use Symfony\Contracts\EventDispatcher\Event;

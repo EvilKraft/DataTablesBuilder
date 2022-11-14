@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder;
+namespace EvilKraft\DatatablesBuilder;
 
-use EvilKraft\DataTablesBuilder\Exporter\DataTableExporterManager;
-use EvilKraft\DataTablesBuilder\Renderer\DatatableRendererInterface;
+use EvilKraft\DatatablesBuilder\Exporter\DataTableExporterManager;
+use EvilKraft\DatatablesBuilder\Renderer\DatatableRendererInterface;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

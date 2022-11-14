@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter;
+namespace EvilKraft\DatatablesBuilder\Exporter;
 
-use EvilKraft\DataTablesBuilder\DataTable;
-use EvilKraft\DataTablesBuilder\Exporter\Event\DataTableExporterResponseEvent;
+use EvilKraft\DatatablesBuilder\DataTable;
+use EvilKraft\DatatablesBuilder\Exporter\Event\DataTableExporterResponseEvent;
 use Iterator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Factory\AppFactory;

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine;
 
-use EvilKraft\DataTablesBuilder\Adapter\AbstractAdapter;
-use EvilKraft\DataTablesBuilder\Adapter\AdapterQuery;
-use EvilKraft\DataTablesBuilder\Adapter\Doctrine\Event\ORMAdapterQueryEvent;
-use EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM\AutomaticQueryBuilder;
-use EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM\QueryBuilderProcessorInterface;
-use EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM\SearchCriteriaProvider;
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\Adapter\AbstractAdapter;
+use EvilKraft\DatatablesBuilder\Adapter\AdapterQuery;
+use EvilKraft\DatatablesBuilder\Adapter\Doctrine\Event\ORMAdapterQueryEvent;
+use EvilKraft\DatatablesBuilder\Adapter\Doctrine\ORM\AutomaticQueryBuilder;
+use EvilKraft\DatatablesBuilder\Adapter\Doctrine\ORM\QueryBuilderProcessorInterface;
+use EvilKraft\DatatablesBuilder\Adapter\Doctrine\ORM\SearchCriteriaProvider;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter;
+namespace EvilKraft\DatatablesBuilder\Adapter;
 
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use Traversable;
 
 abstract class AbstractAdapter implements AdapterInterface

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine\ORM;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine\ORM;
 
-use EvilKraft\DataTablesBuilder\DataTableState;
+use EvilKraft\DatatablesBuilder\DataTableState;
 use Doctrine\ORM\QueryBuilder;
 
 /**

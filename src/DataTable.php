@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder;
+namespace EvilKraft\DatatablesBuilder;
 
-use EvilKraft\DataTablesBuilder\Adapter\AdapterInterface;
-use EvilKraft\DataTablesBuilder\Column\AbstractColumn;
-use EvilKraft\DataTablesBuilder\Column\ActionButtonsColumn;
-use EvilKraft\DataTablesBuilder\Column\TwigColumn;
-use EvilKraft\DataTablesBuilder\Column\TwigStringColumn;
-use EvilKraft\DataTablesBuilder\Exporter\DataTableExporterManager;
-use EvilKraft\DataTablesBuilder\Renderer\DatatableRendererInterface;
+use EvilKraft\DatatablesBuilder\Adapter\AdapterInterface;
+use EvilKraft\DatatablesBuilder\Column\AbstractColumn;
+use EvilKraft\DatatablesBuilder\Column\ActionButtonsColumn;
+use EvilKraft\DatatablesBuilder\Column\TwigColumn;
+use EvilKraft\DatatablesBuilder\Column\TwigStringColumn;
+use EvilKraft\DatatablesBuilder\Exporter\DataTableExporterManager;
+use EvilKraft\DatatablesBuilder\Renderer\DatatableRendererInterface;
 use Exception;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface as Response;

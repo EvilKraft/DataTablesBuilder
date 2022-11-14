@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Adapter\Doctrine;
+namespace EvilKraft\DatatablesBuilder\Adapter\Doctrine;
 
 /**
  * Available events.

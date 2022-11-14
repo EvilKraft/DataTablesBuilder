@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter\Excel;
+namespace EvilKraft\DatatablesBuilder\Exporter\Excel;
 
-use EvilKraft\DataTablesBuilder\Exporter\DataTableExporterInterface;
+use EvilKraft\DatatablesBuilder\Exporter\DataTableExporterInterface;
 use Iterator;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Exception;

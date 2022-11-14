@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Column;
+namespace EvilKraft\DatatablesBuilder\Column;
 
 use DateTime;
 use DateTimeInterface;

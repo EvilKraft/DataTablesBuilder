@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter;
+namespace EvilKraft\DatatablesBuilder\Exporter;
 
 /**
  * Available events.
@@ -17,7 +17,7 @@ final class DataTableExporterEvents
      * Note that the file is accessible through the Response object.
      * Both the file and the Response can be modified before being sent.
      *
-     * @Event("App\Module\Core\Infrastructure\Domain\DataTablesBuilder\Exporter\Event\DataTableExporterResponseEvent")
+     * @Event("App\Module\Core\Infrastructure\Domain\DatatablesBuilder\Exporter\Event\DataTableExporterResponseEvent")
      */
     const PRE_RESPONSE = 'datatables.exporter.pre_response';
 }

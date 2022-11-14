@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EvilKraft\DataTablesBuilder\Exporter\Csv;
+namespace EvilKraft\DatatablesBuilder\Exporter\Csv;
 
-use EvilKraft\DataTablesBuilder\Exporter\DataTableExporterInterface;
+use EvilKraft\DatatablesBuilder\Exporter\DataTableExporterInterface;
 use Iterator;
 use SplFileInfo;
 
