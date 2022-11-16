@@ -40,7 +40,10 @@ class DataTable
         'autoWidth'     => false,
         'order'         => [],  // [] - Disable initial sort; [[ 0, 'asc' ]] - sort by first column
         'searchDelay'   => 400,
-        'dom'           => 'lftrip',
+    //    'dom'           => 'lftrip',
+        'dom'           => "<'row'<'col-12 col-md'fr><'col-auto order-md-first'B><'col-auto ml-auto text-right'b>>"
+                         . "<'row'<'col-sm-12't>>"
+                         . "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         'orderCellsTop' => true,
         'stateSave'     => false,
         'fixedHeader'   => false,

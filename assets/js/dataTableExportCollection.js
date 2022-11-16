@@ -149,7 +149,8 @@ export default function initExportCollection() {
 
     $.fn.dataTable.ext.buttons.export_collection = {
         extend: 'collection',
-        text: '<i class="far fa-save" aria-hidden="true"></i>',
+        text: '',
+        className: 'dtExportBtn',
         titleAttr: function ( dt ) {
             return dt.i18n( 'buttons.Export', 'Export');
         },
@@ -181,5 +182,3 @@ export default function initExportCollection() {
         ],
     };
 };
-
-

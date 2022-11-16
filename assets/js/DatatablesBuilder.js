@@ -1,7 +1,7 @@
-import initActionBtns       from './dataTableActionBtns.js';
-import initColumnFilter     from './dataTableColumnFilter.js';
-import exportButtonDefaults from './dataTableExportCollection.js';
-import initSelectAllBtn     from './dataTableSelectAllBtn.js';
+import initActionBtns       from './dataTableActionBtns.min.js';
+import initColumnFilter     from './dataTableColumnFilter.min.js';
+import exportButtonDefaults from './dataTableExportCollection.min.js';
+import initSelectAllBtn     from './dataTableSelectAllBtn.min.js';
 
 (function($) {
     initActionBtns();
@@ -42,10 +42,6 @@ import initSelectAllBtn     from './dataTableSelectAllBtn.js';
     };
 
     $.extend( true, $.fn.dataTable.defaults, {
-        dom: "<'row'<'col-sm-6 col-lg-3'B><'col-sm-6 col-lg-3'l><'col-sm-6 col-lg-4'fr><'col-sm-6 col-lg-2 text-right'b>>" +
-            "<'row'<'col-sm-12't>>" +
-            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-
 
         scrollY: true /*'64vh'*/,
         scrollX: true,
@@ -61,9 +57,10 @@ import initSelectAllBtn     from './dataTableSelectAllBtn.js';
             'export_collection',
             {
                 extend: 'colvis',
-                text: '<i class="far fa-eye"></i>',
+                text: '',
+                className: 'dtColVisBtn',
                 titleAttr: 'Column visibility',
-                columns: ":not('.action_btns_container,:first')",
+                columns: ":not('.action_btns_container')",
                 postfixButtons: [ 'colvisRestore' ],
             },
         ],
@@ -80,12 +77,12 @@ import initSelectAllBtn     from './dataTableSelectAllBtn.js';
                             return data;
                         }()),*/
 
-       // language: {{ dtLanguage|raw }},
+        // language: {{ dtLanguage|raw }},
 
         select: {
             style: 'multi',
-                selector: 'td:not(.action_btns_container)',
-                blurable: true
+            selector: 'td:not(.action_btns_container)',
+            blurable: true
         },
         stateSave: true,
         stateSaveParams: function (settings, data) {

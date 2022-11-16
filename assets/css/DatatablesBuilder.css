@@ -1,0 +1,71 @@
+td.action_btns_container{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    vertical-align: middle;
+}
+td.action_btns_container .btn {
+    padding: 0;
+    margin: 0 0.3rem;
+    font-size: 1.25em;
+    line-height: 0.35em;
+}
+
+
+/*dataTable Exports*/
+
+
+a.dtExport{
+    padding-left: 30px !important;
+    background-size: 25px 20px ;
+    background-position: left center ;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+a.exportCopy  {background-image: url("../svg/copy.svg");}
+a.exportCsv   {background-image: url("../svg/csv.svg");}
+a.exportExcel {background-image: url("../svg/excel.svg");}
+a.exportPdf   {background-image: url("../svg/pdf.svg");}
+a.exportPrint {background-image: url("../svg/printer.svg");}
+
+.dtExportBtn::before, .dtColVisBtn::before, .dtSelectedNone::before, .dtSelectedAll::before, .dtSelected::before{
+    content:'';
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    width:20px;
+    height: 20px;
+}
+.dtExportBtn:before{background-image: url("../svg/save.svg");}
+.dtColVisBtn:before{background-image: url("../svg/eye.svg");}
+.dtSelectedNone:before{background-image: url("../svg/square.svg");}
+.dtSelectedAll:before{background-image: url("../svg/square-check.svg");}
+.dtSelected:before{background-image: url("../svg/square-minus.svg");}
+
+
+
+.dtCreateBtn::before, .dtDeleteBtn::before, .dtRowUpdate::before, .dtRowDelete::before, .dtRowMoveUp::before, .dtRowMoveDn::before, .dtRowChild::before {
+    content: '';
+    -webkit-mask-size: cover;
+    mask-size: cover;
+
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+
+.dtCreateBtn::before{mask-image: url("../svg/plus.svg");       -webkit-mask-image: url("../svg/plus.svg");       background-color: #28a745;}
+.dtDeleteBtn::before{mask-image: url("../svg/trash.svg");      -webkit-mask-image: url("../svg/trash.svg");      background-color: #e74c3c;}
+.dtRowUpdate::before{mask-image: url("../svg/edit.svg");       -webkit-mask-image: url("../svg/edit.svg");       background-color: #007bff}
+.dtRowDelete::before{mask-image: url("../svg/trash.svg");      -webkit-mask-image: url("../svg/trash.svg");      background-color: #e74c3c;}
+.dtRowMoveUp::before{mask-image: url("../svg/arrow-up.svg");   -webkit-mask-image: url("../svg/arrow-up.svg");   background-color: #007bff}
+.dtRowMoveDn::before{mask-image: url("../svg/arrow-down.svg"); -webkit-mask-image: url("../svg/arrow-down.svg"); background-color: #007bff}
+.dtRowChild::before {mask-image: url("../svg/plus.svg");       -webkit-mask-image: url("../svg/plus.svg");       background-color: #28a745;}
+
+.dtCreateBtn:hover::before{background-color: #218838;}
+.dtDeleteBtn:hover::before{background-color: #e43725;}
+.dtRowUpdate:hover::before{background-color: #0056b3}
+.dtRowDelete:hover::before{background-color: #e43725;}
+.dtRowMoveUp:hover::before{background-color: #0056b3}
+.dtRowMoveDn:hover::before{background-color: #0056b3}
+.dtRowChild:hover::before {background-color: #218838;}

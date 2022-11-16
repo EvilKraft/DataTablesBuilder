@@ -25,14 +25,14 @@ export default function initSelectAllBtn() {
 					const count_selected = that.rows({page: config.page, selected: true}).count();
 
 					if(count_selected === count_all){
-						that.text('<i class="far fa-check-square"></i>');
+						that.nodes().removeClass('dtSelectedNone dtSelected').addClass('dtSelectedAll')
 						that[0].node.setAttribute('title', that.i18n('buttons.selectNone', 'Deselect all'));
 					}else if(count_selected > 0){
-						that.text('<i class="far fa-minus-square"></i>');
+						that.nodes().removeClass('dtSelectedAll dtSelectedNone').addClass('dtSelected')
 						that[0].node.setAttribute('title', that.i18n('buttons.selectAll', 'Select All'));
 					}
 					else{
-						that.text('<i class="far fa-square"></i>');
+						that.nodes().removeClass('dtSelectedAll dtSelected').addClass('dtSelectedNone')
 						that[0].node.setAttribute('title', that.i18n('buttons.selectAll', 'Select All'));
 					}
 				}
