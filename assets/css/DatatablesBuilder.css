@@ -69,3 +69,7 @@ a.exportPrint {background-image: url("../svg/printer.svg");}
 .dtRowMoveUp:hover::before{background-color: #0056b3}
 .dtRowMoveDn:hover::before{background-color: #0056b3}
 .dtRowChild:hover::before {background-color: #218838;}
+
+
+
+

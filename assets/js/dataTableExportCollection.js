@@ -66,84 +66,108 @@ let exportButtonDefaults = {
         //columns: ':not(:last-child)'
         //columns: ':not(.action_btns_container)'
         //columns: [ 0, ':visible' ]
-        columns: [ 0, ':visible:not(.action_btns_container)' ]
+        columns: [':visible:not(.action_btns_container)' ]
     }
 };
 
-export default function initExportCollection() {
+function dataTableServerSideExporter(e, dt, node, config, exporter='excel', method='GET'){
 
-    $.fn.dataTable.ext.buttons.excel2 = {
-        text: 'Export to Excel 2',
-        action: function ( e, dt) {
-            const method   = 'GET';
-            const exporter = 'excel';
-            const tableId  = dt.table().node().id;
-            const url      = dt.ajax.url()
+    const tableId          = dt.table().node().id;
+    const url              = dt.ajax.url()
+    const all_columns      = dt.settings().init().columns;
+    const indexes          = dt.columns(config.exportOptions.columns).indexes().toArray();
+    const original_indexes = dt.colReorder.transpose( indexes, 'toOriginal' );
 
-            const params = $.param($.extend({}, dt.ajax.params(), {'_dt': tableId, '_exporter': exporter}));
+    let columns = [];
+    for (let i of original_indexes) {
+        columns.push(all_columns[i].name);
+    }
 
-            // Credit: https://stackoverflow.com/a/23797348
-            const xhr = new XMLHttpRequest();
-            xhr.open(method, method === 'GET' ? (url + '?' +  params) : url, true);
-            xhr.responseType = 'arraybuffer';
-            xhr.onload = function () {
-                if (this.status === 200) {
-                    let filename = "";
-                    const disposition = xhr.getResponseHeader('Content-Disposition');
-                    if (disposition && disposition.indexOf('attachment') !== -1) {
-                        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const matches = filenameRegex.exec(disposition);
-                        if (matches != null && matches[1]) {
-                            filename = matches[1].replace(/['"]/g, '');
-                        }
-                    }
 
-                    const type = xhr.getResponseHeader('Content-Type');
+    const params = $.param($.extend({}, dt.ajax.params(), {'_dt': tableId, '_exporter': exporter, '_exportColumns': columns}));
 
-                    let blob;
-                    if (typeof File === 'function') {
-                        try {
-                            blob = new File([this.response], filename, { type: type });
-                        } catch (e) { /* Edge */ }
-                    }
+    // Credit: https://stackoverflow.com/a/23797348
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, method === 'GET' ? (url + '?' +  params) : url, true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function () {
+        if (this.status === 200) {
+            let filename = "";
+            const disposition = xhr.getResponseHeader('Content-Disposition');
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                const matches = filenameRegex.exec(disposition);
+                if (matches != null && matches[1]) {
+                    filename = matches[1].replace(/['"]/g, '');
+                }
+            }
 
-                    if (typeof blob === 'undefined') {
-                        blob = new Blob([this.response], { type: type });
-                    }
+            const type = xhr.getResponseHeader('Content-Type');
 
-                    if (typeof window.navigator.msSaveBlob !== 'undefined') {
-                        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
-                        window.navigator.msSaveBlob(blob, filename);
+            let blob;
+            if (typeof File === 'function') {
+                try {
+                    blob = new File([this.response], filename, { type: type });
+                } catch (e) { /* Edge */ }
+            }
+
+            if (typeof blob === 'undefined') {
+                blob = new Blob([this.response], { type: type });
+            }
+
+            if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                window.navigator.msSaveBlob(blob, filename);
+            }
+            else {
+                const URL = window.URL || window.webkitURL;
+                const downloadUrl = URL.createObjectURL(blob);
+
+                if (filename) {
+                    // use HTML5 a[download] attribute to specify filename
+                    const a = document.createElement("a");
+                    // safari doesn't support this yet
+                    if (typeof a.download === 'undefined') {
+                        window.location = downloadUrl;
                     }
                     else {
-                        const URL = window.URL || window.webkitURL;
-                        const downloadUrl = URL.createObjectURL(blob);
-
-                        if (filename) {
-                            // use HTML5 a[download] attribute to specify filename
-                            const a = document.createElement("a");
-                            // safari doesn't support this yet
-                            if (typeof a.download === 'undefined') {
-                                window.location = downloadUrl;
-                            }
-                            else {
-                                a.href = downloadUrl;
-                                a.download = filename;
-                                document.body.appendChild(a);
-                                a.click();
-                            }
-                        }
-                        else {
-                            window.location = downloadUrl;
-                        }
-
-                        setTimeout(function() { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+                        a.href = downloadUrl;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
                     }
                 }
-            };
+                else {
+                    window.location = downloadUrl;
+                }
 
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.send(method === 'POST' ? params : null);
+                setTimeout(function() { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+            }
+        }
+    };
+
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(method === 'POST' ? params : null);
+}
+
+export default function initExportCollection() {
+
+    $.fn.dataTable.ext.buttons.ssExcel = {
+        text: 'Excel',
+        action: function ( e, dt, node, config) {
+            dataTableServerSideExporter(e, dt, node, config,  'excel', 'POST');
+        },
+        exportOptions: {
+            columns: [':visible:not(.action_btns_container)' ]
+        }
+    };
+    $.fn.dataTable.ext.buttons.ssCsv = {
+        text: 'CSV',
+        action: function ( e, dt, node, config) {
+            dataTableServerSideExporter(e, dt, node, config,  'csv', 'POST');
+        },
+        exportOptions: {
+            columns: [':visible:not(.action_btns_container)' ]
         }
     };
 
@@ -155,30 +179,13 @@ export default function initExportCollection() {
             return dt.i18n( 'buttons.Export', 'Export');
         },
         buttons: [
-            $.extend( true, {}, exportButtonDefaults, {
-                extend: 'copy',
-                className: 'dtExport exportCopy',
-            }),
-            $.extend( true, {}, exportButtonDefaults, {
-                extend: 'csv',
-                className: 'dtExport exportCsv',
-            }),
-            $.extend( true, {}, exportButtonDefaults, {
-                extend: 'excel',
-                className: 'dtExport exportExcel',
-            }),
-            $.extend( true, {}, {
-                extend: 'excel2',
-                className: 'dtExport exportExcel buttons-excel2',
-            }),
-            $.extend( true, {}, exportButtonDefaults, {
-                extend: 'pdf',
-                className: 'dtExport exportPdf',
-            }),
-            $.extend( true, {}, exportButtonDefaults, {
-                extend: 'print',
-                className: 'dtExport exportPrint',
-            }),
+            $.extend( true, {}, exportButtonDefaults, {extend: 'copy',    className: 'dtExport exportCopy',  }),
+            //$.extend( true, {}, exportButtonDefaults, {extend: 'csv',   className: 'dtExport exportCsv',   }),
+            //$.extend( true, {}, exportButtonDefaults, {extend: 'excel', className: 'dtExport exportExcel', }),
+            $.extend( true, {},                       {extend: 'ssCsv',   className: 'dtExport exportCsv',   }),
+            $.extend( true, {},                       {extend: 'ssExcel', className: 'dtExport exportExcel', }),
+            $.extend( true, {}, exportButtonDefaults, {extend: 'pdf',     className: 'dtExport exportPdf',   }),
+            $.extend( true, {}, exportButtonDefaults, {extend: 'print',   className: 'dtExport exportPrint', }),
         ],
     };
 };

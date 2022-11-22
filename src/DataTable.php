@@ -204,6 +204,7 @@ class DataTable
                 function (AbstractColumn $column) {
                     return [
                         'data'       => $column->getName(),
+                        'name'       => $column->getName(),
                         'title'      => $this->translator->trans($column->getTitle(), [], $this->getTranslationDomain()),
                         'orderable'  => $column->isOrderable(),
                         'searchable' => $column->isSearchable(),

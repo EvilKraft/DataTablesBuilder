@@ -7,7 +7,7 @@ function dtRowDelete(event) {
     let row = $('#row_'+id);
     let api = $(event.delegateTarget).DataTable();
 
-    if (confirm(api.i18n('buttons.rowDeleteConfirm', 'Are you sure you wont to delete this item?'))){
+    if (confirm(api.i18n('DatatablesBuilder.rowDeleteConfirm', 'Are you sure you wont to delete this item?'))){
         $.ajax({
             url: window.location.href+'/'+id,
             type: "DELETE",
@@ -16,7 +16,7 @@ function dtRowDelete(event) {
             if(data.status === 1){
                 api.row(row).remove().draw();
 
-                appendAlert('success', api.i18n('buttons.itemDeleted', 'Item deleted'));
+                appendAlert('success', api.i18n('DatatablesBuilder.itemDeleted', 'Item deleted'));
             }else{
                 data.errors.forEach(function(error) {
                     appendAlert('error', error.message);
@@ -37,7 +37,7 @@ function dtRowsDelete(event, dt, node, conf) {
         return;
     }
 
-    if(!confirm(dt.i18n('buttons.rowsDeleteConfirm', 'Are you sure you wont to delete selected items?'))){
+    if(!confirm(dt.i18n('DatatablesBuilder.rowsDeleteConfirm', 'Are you sure you wont to delete selected items?'))){
         return;
     }
 
@@ -49,7 +49,7 @@ function dtRowsDelete(event, dt, node, conf) {
         if(data.status === 1){
             rows.remove().draw();
 
-            appendAlert('success', dt.i18n('buttons.itemsDeleted', 'Items deleted'));
+            appendAlert('success', dt.i18n('DatatablesBuilder.itemsDeleted', 'Items deleted'));
         }else{
             data.errors.forEach(function(error) {
                 appendAlert('error', error.message);
@@ -106,16 +106,16 @@ export default function initActionBtns() {
             for (let i = 0; i < actions.length; ++i) {
                 switch (actions[i]){
                     case 'create'   : break;
-                    case 'update'   : newData += '<a      href="'+url+'"     class="'+className+' text-primary dtRowUpdate" title="'+api.i18n('buttons.edit', 'Edit')+'"></a>';          break;
-                    case 'delete'   : newData += '<button data-pkey="'+id+'" class="'+className+' text-danger  dtRowDelete" title="'+api.i18n('buttons.delete', 'Delete')+'"></button>'; break;
-                    case 'addChild' : newData += '<a      href="'+url+'/new" class="'+className+' text-success dtRowChild"  title="'+api.i18n('buttons.addChild', 'Add child')+'"></a>'; break;
+                    case 'update'   : newData += '<a      href="'+url+'"     class="'+className+' text-primary dtRowUpdate" title="'+api.i18n('DatatablesBuilder.edit', 'Edit')+'"></a>';          break;
+                    case 'delete'   : newData += '<button data-pkey="'+id+'" class="'+className+' text-danger  dtRowDelete" title="'+api.i18n('DatatablesBuilder.delete', 'Delete')+'"></button>'; break;
+                    case 'addChild' : newData += '<a      href="'+url+'/new" class="'+className+' text-success dtRowChild"  title="'+api.i18n('DatatablesBuilder.addChild', 'Add child')+'"></a>'; break;
 
                     case 'move'     :
                         const mvUpDisabled = (isFirst) ? ' disabled' : '';
                         const mvDnDisabled = (isLast)  ? ' disabled' : '';
 
-                        newData += '<button data-pkey="'+id+'" class="'+className+' dtRowMoveUp '+mvUpDisabled+'" title="'+api.i18n('buttons.moveUp', 'Move up')+'"></button>';
-                        newData += '<button data-pkey="'+id+'" class="'+className+' dtRowMoveDn '+mvDnDisabled+'" title="'+api.i18n('buttons.moveDn', 'Move down')+'"></button>';
+                        newData += '<button data-pkey="'+id+'" class="'+className+' dtRowMoveUp '+mvUpDisabled+'" title="'+api.i18n('DatatablesBuilder.moveUp', 'Move up')+'"></button>';
+                        newData += '<button data-pkey="'+id+'" class="'+className+' dtRowMoveDn '+mvDnDisabled+'" title="'+api.i18n('DatatablesBuilder.moveDn', 'Move down')+'"></button>';
 
                         break;
                 }
@@ -127,7 +127,7 @@ export default function initActionBtns() {
 
     $.fn.dataTable.ext.buttons.create = {
         titleAttr: function ( dt ) {
-            return dt.i18n( 'buttons.create', 'Add new item');
+            return dt.i18n( 'DatatablesBuilder.create', 'Add new item');
         },
         className: 'dtCreateBtn',
         action: function ( e, dt, node, config ) {
@@ -137,7 +137,7 @@ export default function initActionBtns() {
 
     $.fn.dataTable.ext.buttons.delete = {
         titleAttr: function ( dt ) {
-            return dt.i18n( 'buttons.deleteItems', 'Delete items');
+            return dt.i18n( 'DatatablesBuilder.deleteItems', 'Delete items');
         },
         className: 'dtDeleteBtn',
         action: function ( e, dt, node, conf ) {

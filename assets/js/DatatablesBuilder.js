@@ -59,7 +59,6 @@ import initSelectAllBtn     from './dataTableSelectAllBtn.min.js';
                 extend: 'colvis',
                 text: '',
                 className: 'dtColVisBtn',
-                titleAttr: 'Column visibility',
                 columns: ":not('.action_btns_container')",
                 postfixButtons: [ 'colvisRestore' ],
             },

@@ -26,14 +26,14 @@ export default function initSelectAllBtn() {
 
 					if(count_selected === count_all){
 						that.nodes().removeClass('dtSelectedNone dtSelected').addClass('dtSelectedAll')
-						that[0].node.setAttribute('title', that.i18n('buttons.selectNone', 'Deselect all'));
+						that[0].node.setAttribute('title', that.i18n('DatatablesBuilder.selectNone', 'Deselect all'));
 					}else if(count_selected > 0){
 						that.nodes().removeClass('dtSelectedAll dtSelectedNone').addClass('dtSelected')
-						that[0].node.setAttribute('title', that.i18n('buttons.selectAll', 'Select All'));
+						that[0].node.setAttribute('title', that.i18n('DatatablesBuilder.selectAll', 'Select All'));
 					}
 					else{
 						that.nodes().removeClass('dtSelectedAll dtSelected').addClass('dtSelectedNone')
-						that[0].node.setAttribute('title', that.i18n('buttons.selectAll', 'Select All'));
+						that[0].node.setAttribute('title', that.i18n('DatatablesBuilder.selectAll', 'Select All'));
 					}
 				}
 			});
