@@ -90,7 +90,7 @@ export default function initActionBtns() {
         const className = "btn btn-link text-decoration-none";
 
         return function ( data, type, row, meta ) {
-            if(type !== 'display' || meta.settings.bDrawing === false) {
+            if(type !== 'display' /*|| meta.settings.bDrawing === false*/) {
                 return data;
             }
 
