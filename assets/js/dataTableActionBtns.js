@@ -1,3 +1,5 @@
+// noinspection JSUnusedLocalSymbols
+
 function dtRowDelete(event) {
     event.preventDefault();
     let btn = $(event.currentTarget);
@@ -14,6 +16,7 @@ function dtRowDelete(event) {
             dataType: "json",
         }).done(function(data) {
             if(data.status === 1){
+                // noinspection JSUnresolvedFunction
                 api.row(row).remove().draw();
 
                 appendAlert('success', api.i18n('DatatablesBuilder.itemDeleted', 'Item deleted'));
@@ -98,7 +101,9 @@ export default function initActionBtns() {
 //          const id      = row['DT_RowId'].replace(/row_(.+)/, "$1");
             const url     = window.location.href + '/' + id;
             const api     = new $.fn.dataTable.Api(meta.settings);
-            const actions = api.init().dataTableActionBtns;
+
+            // noinspection JSUnresolvedVariable
+            const actions = api.init().dtBuilder.actionButtons || ['update', 'delete'];
             const isFirst = meta.row === 0;
             const isLast  = meta.row === meta.settings.json.recordsTotal - 1;
 
@@ -156,16 +161,18 @@ export default function initActionBtns() {
     };
 
     $.fn.dataTable.dataTableActionBtns = function ( inst ) {
-        let api = new $.fn.dataTable.Api( inst );
+        const api = new $.fn.dataTable.Api( inst );
 
-        const container = new $.fn.dataTable.Buttons(api, {
-            //    name: 'main',
-            buttons: api.init().dataTableActionBtns || ['create', 'delete'],
-        }).container();
+        // noinspection JSUnresolvedVariable
+        const actions = api.init().dtBuilder.actionButtons || ['create', 'delete'];
 
         // API so the feature wrapper can return the node to insert
         this.container = function () {
-            return container;
+            // noinspection JSUnresolvedFunction
+            return new $.fn.dataTable.Buttons(api, {
+                //    name: 'main',
+                buttons: actions.filter(value => ['create', 'delete'].includes(value)),
+            }).container();
         };
     };
     //    $.fn.DataTable.dataTableActionBtns = $.fn.dataTable.dataTableActionBtns;
