@@ -120,6 +120,16 @@ class ArrayAdapter implements AdapterInterface
             $row[$column->getName()] = $value;
         }
 
+        foreach ($state->getSearchColumns() as $searchInfo) {
+            /** @var AbstractColumn $column */
+            $column = $searchInfo['column'];
+            $search = $searchInfo['search'];
+
+            if (!$match) {
+                $match = (false !== mb_stripos($row[$column->getName()], $search));
+            }
+        }
+
         return $match ? $row : null;
     }
 }

@@ -7,6 +7,7 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
 class TwigRenderer implements DatatableRendererInterface
 {
@@ -15,6 +16,11 @@ class TwigRenderer implements DatatableRendererInterface
 
     public function __construct(Environment $twig)
     {
+        if($twig->getLoader() instanceof FilesystemLoader){
+            /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+            $twig->getLoader()->addPath(__DIR__.'/../../templates/', 'DataTables');
+        }
+
         $this->twig = $twig;
     }
 
